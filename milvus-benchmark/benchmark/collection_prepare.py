@@ -34,7 +34,7 @@ if __name__ == '__main__':
     logging.basicConfig(filename=f"/tmp/{log_name}.log",
                         level=logging.INFO, format=LOG_FORMAT, datefmt=DATE_FORMAT)
     logging.info("start")
-    collection_name = f"random_1m"
+    collection_name = f"random_benchmark_collection"
 
     # check if collection exists
     if (utility.has_collection(collection_name)):

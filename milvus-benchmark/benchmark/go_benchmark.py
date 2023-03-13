@@ -138,7 +138,7 @@ if __name__ == "__main__":
     dim = int(sys.argv[2])                                           # dim of vectors
     topk = 1
     ef = 64                                                     # search params
-    collection_name = "random_1m"                               # collection name
+    collection_name = "random_benchmark_collection"             # collection name
     index_type = "hnsw"                                         # index type
     anns_field = "embedding"                                    # vector field name
     metric_type = "L2"
