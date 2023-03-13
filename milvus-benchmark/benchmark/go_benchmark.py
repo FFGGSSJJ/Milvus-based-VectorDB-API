@@ -37,7 +37,7 @@ def write_json_file(vectors, json_file_path=""):
     return json_file_path
 
 
-def go_search(go_benchmark: str, uri: str, user: str, password: str, collection_name: str, search_params: dict,
+def  go_search(go_benchmark: str, uri: str, user: str, password: str, collection_name: str, search_params: dict,
               index_type: str, search_timeout: int, search_vector_file: str, concurrent_num, during_time, interval,
               log_path: str, output_format="json", partition_names=[], use_account=False):
     """
@@ -120,8 +120,13 @@ def go_search(go_benchmark: str, uri: str, user: str, password: str, collection_
 
 
 if __name__ == "__main__":
+    # check usage
+    if (len(sys.argv) < 4):
+        print("Usage: python3 go_benchmark.py <host addr> <dim# of vector> <path to benchmark bin>")
+        sys.exit()
+
     host = sys.argv[1]                                          # host address
-    go_benchmark = sys.argv[2]                                  # path to benchmark binary file  e.g. "/home/benchmark-mac"
+    go_benchmark = sys.argv[3]                                  # path to benchmark binary file  e.g. "/home/benchmark-mac"
 
     # parameters needed to be modified
     uri = f"{host}:19530"                                       # host and port of milvus
@@ -130,7 +135,7 @@ if __name__ == "__main__":
     use_account = False                                         # False if no user configured
 
     nq = 1
-    dim = 128                                                   # dim of vectors
+    dim = int(sys.argv[2])                                           # dim of vectors
     topk = 1
     ef = 64                                                     # search params
     collection_name = "random_1m"                               # collection name

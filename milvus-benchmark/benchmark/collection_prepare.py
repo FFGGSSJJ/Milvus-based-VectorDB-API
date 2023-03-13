@@ -9,9 +9,14 @@ from pymilvus import connections, utility, DataType, \
 LOG_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
 DATE_FORMAT = "%m/%d/%Y %H:%M:%S %p"
 
+# check usage
+if (len(sys.argv) < 4):
+    print("Usage: python3 collection_prepare.py <host addr> <# of vectors> <dim# of vector>")
+    sys.exit()
+
 # determine the vector number and dimension by user
-nb = sys.argv[1]
-dim = sys.argv[2]
+nb = int(sys.argv[2])    # 50000
+dim = int(sys.argv[3])   # 128
 auto_id = True
 index_params = {"index_type": "HNSW", "params": {
     "M": 8, "efConstruction": 200}, "metric_type": "L2"}
@@ -33,18 +38,17 @@ if __name__ == '__main__':
 
     # check if collection exists
     if (utility.has_collection(collection_name)):
-        logging.info('collection exists: drop the original collection')
+        logging.info('collection exists: release and drop the original collection')
+        collection = Collection(collection_name)
+        collection.release()
         utility.drop_collection(collection_name)
 
     # create collection with schemas
-    id = FieldSchema(name="id", dtype=DataType.INT64,
-                     description="auto primary id")
-    age_field = FieldSchema(
-        name="age", dtype=DataType.INT64, description="age")
-    embedding_field = FieldSchema(
-        name="embedding", dtype=DataType.FLOAT_VECTOR, dim=dim)
-    schema = CollectionSchema(fields=[id, age_field, embedding_field],
-                              auto_id=auto_id, primary_field=id.name,
+    id_field = FieldSchema(name="id", dtype=DataType.INT64, description="auto primary id")
+    age_field = FieldSchema(name="age", dtype=DataType.INT64, description="age")
+    embedding_field = FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=dim)
+    schema = CollectionSchema(fields=[id_field, age_field, embedding_field],
+                              auto_id=auto_id, primary_field=id_field.name,
                               description="my collection")
     collection = Collection(name=collection_name,
                             schema=schema, shards_num=shards)
@@ -59,18 +63,19 @@ if __name__ == '__main__':
         t0 = time.time()
         collection.insert(data)
         tt = round(time.time() - t0, 3)
-        logging.info(f"Insert {i} costs {tt}")
+        logging.info(f"Insert data{i}:[[{nb}*1], [{nb}*{dim}]] costs {tt}s")
 
     collection.flush()
     logging.info(f"collection entities: {collection.num_entities}")
 
     # create index in the collection
     t0 = time.time()
-    collection.create_index(
-        field_name=embedding_field.name, index_params=index_params)
+    collection.create_index(field_name=embedding_field.name, index_params=index_params)
     tt = round(time.time() - t0, 3)
     logging.info(f"Build index costs {tt}")
 
     # load the collection into memory
     collection.load()
     logging.info("collection prepare completed")
+
+    # disconnect ?
