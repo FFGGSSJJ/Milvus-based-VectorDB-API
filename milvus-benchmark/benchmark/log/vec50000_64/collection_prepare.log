@@ -1,0 +1,29 @@
+03/13/2023 17:44:02 PM - INFO - start
+03/13/2023 17:44:02 PM - INFO - create random_benchmark_collection successfully
+03/13/2023 17:44:06 PM - INFO - Insert data0:[[50000*1], [50000*64]] costs 3.459s
+03/13/2023 17:44:10 PM - INFO - Insert data1:[[50000*1], [50000*64]] costs 3.528s
+03/13/2023 17:44:13 PM - INFO - Insert data2:[[50000*1], [50000*64]] costs 3.494s
+03/13/2023 17:44:17 PM - INFO - Insert data3:[[50000*1], [50000*64]] costs 3.526s
+03/13/2023 17:44:21 PM - INFO - Insert data4:[[50000*1], [50000*64]] costs 3.475s
+03/13/2023 17:44:25 PM - INFO - Insert data5:[[50000*1], [50000*64]] costs 3.447s
+03/13/2023 17:44:28 PM - INFO - Insert data6:[[50000*1], [50000*64]] costs 3.48s
+03/13/2023 17:44:32 PM - INFO - Insert data7:[[50000*1], [50000*64]] costs 3.452s
+03/13/2023 17:44:36 PM - INFO - Insert data8:[[50000*1], [50000*64]] costs 3.489s
+03/13/2023 17:44:40 PM - INFO - Insert data9:[[50000*1], [50000*64]] costs 3.514s
+03/13/2023 17:44:44 PM - INFO - Insert data10:[[50000*1], [50000*64]] costs 3.443s
+03/13/2023 17:44:47 PM - INFO - Insert data11:[[50000*1], [50000*64]] costs 3.5s
+03/13/2023 17:44:51 PM - INFO - Insert data12:[[50000*1], [50000*64]] costs 3.47s
+03/13/2023 17:44:55 PM - INFO - Insert data13:[[50000*1], [50000*64]] costs 3.51s
+03/13/2023 17:44:59 PM - INFO - Insert data14:[[50000*1], [50000*64]] costs 3.474s
+03/13/2023 17:45:02 PM - INFO - Insert data15:[[50000*1], [50000*64]] costs 3.474s
+03/13/2023 17:45:06 PM - INFO - Insert data16:[[50000*1], [50000*64]] costs 3.467s
+03/13/2023 17:45:10 PM - INFO - Insert data17:[[50000*1], [50000*64]] costs 3.506s
+03/13/2023 17:45:14 PM - INFO - Insert data18:[[50000*1], [50000*64]] costs 3.457s
+03/13/2023 17:45:17 PM - INFO - Insert data19:[[50000*1], [50000*64]] costs 3.496s
+03/13/2023 17:45:20 PM - INFO - collection entities: 1000000
+03/13/2023 17:45:40 PM - WARNING - [93m[get_index_state] retry:4, cost: 0.27s, reason: <_MultiThreadedRendezvous: StatusCode.UNAVAILABLE, failed to connect to all addresses>[0m
+03/13/2023 17:45:40 PM - WARNING - [93m[get_index_state] retry:5, cost: 0.81s, reason: <_MultiThreadedRendezvous: StatusCode.UNAVAILABLE, failed to connect to all addresses>[0m
+03/13/2023 17:45:41 PM - WARNING - [93m[get_index_state] retry:6, cost: 2.43s, reason: <_MultiThreadedRendezvous: StatusCode.UNAVAILABLE, failed to connect to all addresses>[0m
+03/13/2023 17:45:43 PM - WARNING - [93m[get_index_state] retry:7, cost: 7.29s, reason: <_MultiThreadedRendezvous: StatusCode.UNAVAILABLE, failed to connect to all addresses>[0m
+03/13/2023 17:45:51 PM - WARNING - [93m[get_index_state] retry:8, cost: 21.87s, reason: <_MultiThreadedRendezvous: StatusCode.UNAVAILABLE, internal: Milvus Proxy is not ready yet. please wait>[0m
+03/13/2023 17:46:13 PM - WARNING - [93m[get_index_state] retry:9, cost: 60.00s, reason: <_MultiThreadedRendezvous: StatusCode.UNAVAILABLE, internal: Milvus Proxy is not ready yet. please wait>[0m
