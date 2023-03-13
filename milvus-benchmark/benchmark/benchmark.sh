@@ -28,4 +28,4 @@ mkdir ./log/vec${vector_num}_${vector_dim}
 # move generated files into the log dir
 echo "Move generated logs into log dir"
 mv /tmp/collection_prepare.log ./log/vec${vector_num}_${vector_dim}
-mv *.log ./log/vec${vector_num}_${vector_dim}
+mv *.log *.json ./log/vec${vector_num}_${vector_dim}
