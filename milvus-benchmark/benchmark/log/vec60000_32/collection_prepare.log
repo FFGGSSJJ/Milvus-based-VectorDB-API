@@ -1,0 +1,25 @@
+03/13/2023 18:11:35 PM - INFO - start
+03/13/2023 18:11:36 PM - INFO - create random_benchmark_collection successfully
+03/13/2023 18:11:38 PM - INFO - Insert data0:[[60000*1], [60000*32]] costs 2.327s
+03/13/2023 18:11:41 PM - INFO - Insert data1:[[60000*1], [60000*32]] costs 2.312s
+03/13/2023 18:11:43 PM - INFO - Insert data2:[[60000*1], [60000*32]] costs 2.283s
+03/13/2023 18:11:45 PM - INFO - Insert data3:[[60000*1], [60000*32]] costs 2.275s
+03/13/2023 18:11:48 PM - INFO - Insert data4:[[60000*1], [60000*32]] costs 2.259s
+03/13/2023 18:11:50 PM - INFO - Insert data5:[[60000*1], [60000*32]] costs 2.265s
+03/13/2023 18:11:53 PM - INFO - Insert data6:[[60000*1], [60000*32]] costs 2.235s
+03/13/2023 18:11:55 PM - INFO - Insert data7:[[60000*1], [60000*32]] costs 2.307s
+03/13/2023 18:11:58 PM - INFO - Insert data8:[[60000*1], [60000*32]] costs 2.31s
+03/13/2023 18:12:00 PM - INFO - Insert data9:[[60000*1], [60000*32]] costs 2.274s
+03/13/2023 18:12:03 PM - INFO - Insert data10:[[60000*1], [60000*32]] costs 2.249s
+03/13/2023 18:12:05 PM - INFO - Insert data11:[[60000*1], [60000*32]] costs 2.269s
+03/13/2023 18:12:08 PM - INFO - Insert data12:[[60000*1], [60000*32]] costs 2.234s
+03/13/2023 18:12:10 PM - INFO - Insert data13:[[60000*1], [60000*32]] costs 2.336s
+03/13/2023 18:12:13 PM - INFO - Insert data14:[[60000*1], [60000*32]] costs 2.231s
+03/13/2023 18:12:15 PM - INFO - Insert data15:[[60000*1], [60000*32]] costs 2.283s
+03/13/2023 18:12:18 PM - INFO - Insert data16:[[60000*1], [60000*32]] costs 2.286s
+03/13/2023 18:12:20 PM - INFO - Insert data17:[[60000*1], [60000*32]] costs 2.271s
+03/13/2023 18:12:23 PM - INFO - Insert data18:[[60000*1], [60000*32]] costs 2.202s
+03/13/2023 18:12:25 PM - INFO - Insert data19:[[60000*1], [60000*32]] costs 2.282s
+03/13/2023 18:12:28 PM - INFO - collection entities: 1200000
+03/13/2023 18:13:09 PM - INFO - Build index costs 41.599
+03/13/2023 18:13:12 PM - INFO - collection prepare completed
