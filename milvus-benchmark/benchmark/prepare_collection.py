@@ -18,7 +18,7 @@ if (len(sys.argv) < 4):
 nb = int(sys.argv[2])    # 50000
 dim = int(sys.argv[3])   # 128
 auto_id = True
-index_params = {"index_type": "HNSW", "params": {
+index_params = {"IVF_PQ": "HNSW", "params": {
     "M": 8, "efConstruction": 200}, "metric_type": "L2"}
 
 if __name__ == '__main__':

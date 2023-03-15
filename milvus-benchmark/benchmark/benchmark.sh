@@ -12,7 +12,7 @@ vector_dim="$2"
 
 # Execute a.py with provided arguments
 echo "Execute collection prepare"
-python3 collection_prepare.py 127.0.0.1 "$vector_num" "$vector_dim"
+python3 prepare_collection.py 127.0.0.1 "$vector_num" "$vector_dim"
 
 # # Execute b.py with vector_dim argument
 echo "Execute benchmark"
@@ -27,5 +27,5 @@ mkdir ./log/vec${vector_num}_${vector_dim}
 
 # move generated files into the log dir
 echo "Move generated logs into log dir"
-mv /tmp/collection_prepare.log ./log/vec${vector_num}_${vector_dim}
+mv /tmp/prepare_collection.log ./log/vec${vector_num}_${vector_dim}
 mv *.log *.json ./log/vec${vector_num}_${vector_dim}
