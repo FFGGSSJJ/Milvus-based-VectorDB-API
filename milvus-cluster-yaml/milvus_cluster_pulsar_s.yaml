@@ -1,0 +1,156 @@
+apiVersion: milvus.io/v1beta1
+kind: Milvus
+metadata:
+  name: milvus-cluster-pulsar-43
+  labels:
+    app: milvus
+spec:
+  components:
+    dataCoord:
+      resources:
+        limits:
+          cpu: "0.5"
+          memory: 2Gi
+    queryCoord:
+      resources:
+        limits:
+          cpu: "0.5"
+          memory: 2Gi
+    indexCoord:
+      resources:
+        limits:
+          cpu: "0.5"
+          memory: 2Gi
+    rootCoord:
+      resources:
+        limits:
+          cpu: 1
+          memory: 2Gi
+    dataNode:
+      replicas: 1
+      resources:
+        limits:
+          cpu: 2
+          memory: 8Gi
+    indexNode:
+      replicas: 2
+      resources:
+        limits:
+          cpu: 4
+          memory: 8Gi
+    queryNode:
+      replicas: 3
+      resources:
+        limits:
+          cpu: 4
+          memory: 16Gi
+    proxy:
+      replicas: 1
+      resources:
+        limits:
+          cpu: 1
+          memory: 4Gi
+  config: {}
+  dependencies:
+    etcd:
+      inCluster:
+        values:
+          autoCompactionMode: revision
+          autoCompactionRetention: "1000"
+          extraEnvVars:
+            - name: ETCD_QUOTA_BACKEND_BYTES
+              value: "4294967296"
+            - name: ETCD_HEARTBEAT_INTERVAL
+              value: "500"
+            - name: ETCD_ELECTION_TIMEOUT
+              value: "25000"
+            - name: ETCD_SNAPSHOT_COUNT
+              value: "10000"
+            - name: ETCD_ENABLE_PPROF
+              value: "true"
+          persistence:
+            accessMode: ReadWriteOnce
+            enabled: true
+            size: 30Gi #SSD Required
+            storageClass:
+          replicaCount: 3
+          resources:
+            limits:
+              cpu: 2
+              memory: 4Gi
+            requests:
+              cpu: 2
+              memory: 4Gi
+
+    pulsar:
+      inCluster:
+        values:
+          proxy:
+            replicaCount: 2
+            configData:
+              PULSAR_MEM: >
+                -Xms2048M
+                -Xmx2048M
+                -XX:MaxDirectMemorySize=2048M
+              httpNumThreads: "100"
+          zookeeper:
+            volumes:
+              persistence: true
+              data:
+                name: data
+                size: 20Gi #SSD Required
+                storageClassName:
+            resources:
+              requests:
+                memory: 2Gi
+                cpu: 1
+            configData:
+              PULSAR_MEM: >
+                -Xms1024M
+                -Xmx1024M
+          bookkeeper:
+            volumes:
+              journal:
+                name: journal
+                size: 10Gi
+                storageClassName:
+              ledgers:
+                name: ledgers
+                size: 30Gi #SSD Required
+                storageClassName:
+            resources:
+              requests:
+                memory: 16Gi
+                cpu: 2
+            configData:
+              PULSAR_MEM: >
+                -Xms4096M
+                -Xmx4096M
+                -XX:MaxDirectMemorySize=8192M
+          broker:
+            component: broker
+            podMonitor:
+              enabled: false
+            replicaCount: 2
+            resources:
+              requests:
+                memory: 18Gi
+                cpu: 2
+            configData:
+              PULSAR_MEM: >
+                -Xms4096M
+                -Xmx4096M
+                -XX:MaxDirectMemorySize=8192M
+
+    storage:
+      inCluster:
+        values:
+          mode: distributed
+          resources:
+            limits:
+              cpu: 2
+              memory: 8Gi
+          persistence:
+            storageClass:
+            accessMode: ReadWriteOnce
+            size: 90Gi

@@ -2,7 +2,7 @@
 apiVersion: milvus.io/v1beta1
 kind: Milvus
 metadata:
-  name: milvus-cluster-43
+  name: milvus-cluster-default-43
   labels:
     app: milvus
 spec:

@@ -1,0 +1,125 @@
+apiVersion: milvus.io/v1beta1
+kind: Milvus
+metadata:
+  name: milvus-cluster-kafka-43
+  labels:
+    app: milvus
+spec:
+  components:
+    dataCoord:
+      resources:
+        limits:
+          cpu: "0.5"
+          memory: 2Gi
+    queryCoord:
+      resources:
+        limits:
+          cpu: "0.5"
+          memory: 2Gi
+    indexCoord:
+      resources:
+        limits:
+          cpu: "0.5"
+          memory: 2Gi
+    rootCoord:
+      resources:
+        limits:
+          cpu: 1
+          memory: 2Gi
+    dataNode:
+      replicas: 1
+      resources:
+        limits:
+          cpu: 1
+          memory: 4Gi
+    indexNode:
+      replicas: 1
+      resources:
+        limits:
+          cpu: 4
+          memory: 8Gi
+    queryNode:
+      replicas: 1
+      resources:
+        limits:
+          cpu: 1
+          memory: 4Gi
+    proxy:
+      replicas: 1
+      resources:
+        limits:
+          cpu: 1
+          memory: 4Gi
+  config: {}
+  dependencies:
+    etcd:
+      inCluster:
+        values:
+          autoCompactionMode: revision
+          autoCompactionRetention: "1000"
+          extraEnvVars:
+            - name: ETCD_QUOTA_BACKEND_BYTES
+              value: "4294967296"
+            - name: ETCD_HEARTBEAT_INTERVAL
+              value: "500"
+            - name: ETCD_ELECTION_TIMEOUT
+              value: "25000"
+            - name: ETCD_SNAPSHOT_COUNT
+              value: "10000"
+            - name: ETCD_ENABLE_PPROF
+              value: "true"
+          persistence:
+            accessMode: ReadWriteOnce
+            enabled: true
+            size: 30Gi #SSD Required
+            storageClass:
+          replicaCount: 3
+          resources:
+            limits:
+              cpu: 2
+              memory: 4Gi
+            requests:
+              cpu: 2
+              memory: 4Gi
+
+    msgStreamType: kafka
+    kafka:
+      inCluster:
+        values:
+          heapOpts: "-Xmx4096M -Xms4096M"
+          persistence:
+            enabled: true
+            storageClass:
+            accessMode: ReadWriteOnce
+            size: 10Gi
+          resources:
+            limits:
+              cpu: 2
+              memory: 13Gi
+          zookeeper:
+            enabled: true
+            replicaCount: 3
+            heapSize: 1024 # zk heap size in MB
+            persistence:
+              enabled: true
+              storageClass: ""
+              accessModes:
+                - ReadWriteOnce
+              size: 20Gi #SSD Required
+            resources:
+              limits:
+                cpu: 1
+                memory: 2Gi
+
+    storage:
+      inCluster:
+        values:
+          mode: distributed
+          resources:
+            limits:
+              cpu: 2
+              memory: 8Gi
+          persistence:
+            storageClass:
+            accessMode: ReadWriteOnce
+            size: 10Gi
