@@ -11,10 +11,6 @@ spec:
         limits:
           cpu: "0.5"
           memory: 2Gi
-      segment:
-        maxSize: 512
-        sealProportion: 0.23
-        assignmentExpiration: 2000
     queryCoord:
       resources:
         limits:
