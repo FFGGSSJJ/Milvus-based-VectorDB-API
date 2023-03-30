@@ -1,0 +1,12 @@
+# This is a sample to deploy a milvus cluster in milvus-operator's default configurations.
+apiVersion: milvus.io/v1beta1
+kind: Milvus
+metadata:
+  name: milvus-cluster-43
+  labels:
+    app: milvus
+spec:
+  mode: cluster
+  dependencies: {}
+  components: {}
+  config: {}
