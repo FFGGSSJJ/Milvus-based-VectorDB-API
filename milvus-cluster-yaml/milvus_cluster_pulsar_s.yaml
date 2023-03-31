@@ -76,13 +76,6 @@ spec:
             size: 30Gi #SSD Required
             storageClass:
           replicaCount: 3
-          resources:
-            limits:
-              cpu: 2
-              memory: 4Gi
-            # requests:
-            #   cpu: 2
-            #   memory: 4Gi
 
     pulsar:
       inCluster:
@@ -102,10 +95,6 @@ spec:
                 name: data
                 size: 20Gi #SSD Required
                 storageClassName:
-            resources:
-              # requests:
-              #   memory: 2Gi
-              #   cpu: 2
             configData:
               PULSAR_MEM: >
                 -Xms1024M
@@ -120,10 +109,6 @@ spec:
                 name: ledgers
                 size: 30Gi #SSD Required
                 storageClassName:
-            resources:
-              # requests:
-              #   memory: 1Gi
-              #   cpu: 2
             configData:
               PULSAR_MEM: >
                 -Xms4096M
@@ -134,10 +119,6 @@ spec:
             podMonitor:
               enabled: false
             replicaCount: 2
-            resources:
-              # requests:
-              #   memory: 1Gi
-              #   cpu: 2
             configData:
               PULSAR_MEM: >
                 -Xms4096M
@@ -148,10 +129,6 @@ spec:
       inCluster:
         values:
           mode: distributed
-          resources:
-            limits:
-              cpu: 2
-              memory: 8Gi
           persistence:
             storageClass:
             accessMode: ReadWriteOnce
