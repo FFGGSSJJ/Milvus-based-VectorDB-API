@@ -122,8 +122,8 @@ spec:
                 storageClassName:
             resources:
               requests:
-                memory: 16Gi
-                cpu: 2
+                memory: 1Gi
+                cpu: 1
             configData:
               PULSAR_MEM: >
                 -Xms4096M
@@ -136,8 +136,8 @@ spec:
             replicaCount: 2
             resources:
               requests:
-                memory: 18Gi
-                cpu: 2
+                memory: 1Gi
+                cpu: 1
             configData:
               PULSAR_MEM: >
                 -Xms4096M
