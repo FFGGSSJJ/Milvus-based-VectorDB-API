@@ -2,6 +2,7 @@ apiVersion: milvus.io/v1beta1
 kind: Milvus
 metadata:
   name: milvus-cluster-pulsar-43
+  # namespace: milvus
   labels:
     app: milvus
 spec:
