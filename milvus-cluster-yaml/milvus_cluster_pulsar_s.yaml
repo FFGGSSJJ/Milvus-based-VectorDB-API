@@ -95,10 +95,10 @@ spec:
                 memory: 256Mi
             configData:
               PULSAR_MEM: >
-                -Xms2048M
-                -Xmx2048M
-                -XX:MaxDirectMemorySize=2048M
-              httpNumThreads: "100"
+                -Xms256m 
+                -Xmx256m
+              PULSAR_GC: >
+                -XX:MaxDirectMemorySize=256m
           zookeeper:
             volumes:
               persistence: true
@@ -114,6 +114,14 @@ spec:
               PULSAR_MEM: >
                 -Xms256m
                 -Xmx256m
+              PULSAR_GC: >
+                -Dcom.sun.management.jmxremote
+                -Djute.maxbuffer=10485760
+                -XX:+ParallelRefProcEnabled
+                -XX:+UnlockExperimentalVMOptions
+                -XX:+DoEscapeAnalysis -XX:+DisableExplicitGC
+                -XX:+PerfDisableSharedMem
+                -Dzookeeper.forceSync=no
           bookkeeper:
             volumes:
               journal:
@@ -133,6 +141,21 @@ spec:
                 -Xms256m
                 -Xmx256m
                 -XX:MaxDirectMemorySize=256m
+              PULSAR_GC: >
+                -Dio.netty.leakDetectionLevel=disabled
+                -Dio.netty.recycler.linkCapacity=1024
+                -XX:+UseG1GC -XX:MaxGCPauseMillis=10
+                -XX:+ParallelRefProcEnabled
+                -XX:+UnlockExperimentalVMOptions
+                -XX:+DoEscapeAnalysis
+                -XX:ParallelGCThreads=32
+                -XX:ConcGCThreads=32
+                -XX:G1NewSizePercent=50
+                -XX:+DisableExplicitGC
+                -XX:-ResizePLAB
+                -XX:+ExitOnOutOfMemoryError
+                -XX:+PerfDisableSharedMem
+                -XX:+PrintGCDetails
           broker:
             component: broker
             podMonitor:
@@ -146,6 +169,19 @@ spec:
               PULSAR_MEM: >
                 -Xms256m
                 -Xmx256m
+              PULSAR_GC: >
+                -XX:MaxDirectMemorySize=256m
+                -Dio.netty.leakDetectionLevel=disabled
+                -Dio.netty.recycler.linkCapacity=1024
+                -XX:+ParallelRefProcEnabled
+                -XX:+UnlockExperimentalVMOptions
+                -XX:+DoEscapeAnalysis
+                -XX:ParallelGCThreads=32
+                -XX:ConcGCThreads=32
+                -XX:G1NewSizePercent=50
+                -XX:+DisableExplicitGC
+                -XX:-ResizePLAB
+                -XX:+ExitOnOutOfMemoryError
     storage:
       inCluster:
         values:
