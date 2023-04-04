@@ -10,45 +10,69 @@ spec:
   components:
     dataCoord:
       resources:
+        requests:
+          cpu: 0.1
+          memory: 256Mi
         limits:
           cpu: "0.5"
           memory: 2Gi
     queryCoord:
       resources:
+        requests:
+          cpu: 0.1
+          memory: 256Mi
         limits:
           cpu: "0.5"
           memory: 2Gi
     indexCoord:
       resources:
+        requests:
+          cpu: 0.1
+          memory: 256Mi
         limits:
           cpu: "0.5"
           memory: 2Gi
     rootCoord:
       resources:
+        requests:
+          cpu: 0.1
+          memory: 256Mi
         limits:
           cpu: 1
           memory: 2Gi
     dataNode:
       replicas: 1
       resources:
+        requests:
+          cpu: 0.1
+          memory: 256Mi
         limits:
           cpu: 2
           memory: 8Gi
     indexNode:
       replicas: 2
       resources:
+        requests:
+          cpu: 0.1
+          memory: 256Mi
         limits:
           cpu: 4
           memory: 8Gi
     queryNode:
       replicas: 3
       resources:
+        requests:
+          cpu: 0.1
+          memory: 256Mi
         limits:
           cpu: 4
           memory: 16Gi
     proxy:
       replicas: 1
       resources:
+        requests:
+          cpu: 0.1
+          memory: 256Mi
         limits:
           cpu: 1
           memory: 4Gi
@@ -87,8 +111,18 @@ spec:
     pulsar:
       inCluster:
         values:
+          components: 
+            autorecovery: true
+            functions: false
+            toolset: false
+            pulsar_manager: false
+          monitoring:
+            prometheus: false
+            grafana: false
+            node_exporter: false
+            alert_manager: false
           proxy:
-            replicaCount: 2
+            replicaCount: 1
             resources:
               requests:
                 cpu: 0.01
@@ -99,29 +133,6 @@ spec:
                 -Xmx256m
               PULSAR_GC: >
                 -XX:MaxDirectMemorySize=256m
-          zookeeper:
-            volumes:
-              persistence: true
-              data:
-                name: data
-                size: 20Gi #SSD Required
-                storageClassName:
-            resources:
-              requests:
-                cpu: 0.01
-                memory: 256Mi
-            configData:
-              PULSAR_MEM: >
-                -Xms256m
-                -Xmx256m
-              PULSAR_GC: >
-                -Dcom.sun.management.jmxremote
-                -Djute.maxbuffer=10485760
-                -XX:+ParallelRefProcEnabled
-                -XX:+UnlockExperimentalVMOptions
-                -XX:+DoEscapeAnalysis -XX:+DisableExplicitGC
-                -XX:+PerfDisableSharedMem
-                -Dzookeeper.forceSync=no
           bookkeeper:
             volumes:
               journal:
@@ -156,6 +167,29 @@ spec:
                 -XX:+ExitOnOutOfMemoryError
                 -XX:+PerfDisableSharedMem
                 -XX:+PrintGCDetails
+          zookeeper:
+            volumes:
+              persistence: true
+              data:
+                name: data
+                size: 20Gi #SSD Required
+                storageClassName:
+            resources:
+              requests:
+                cpu: 0.01
+                memory: 256Mi
+            configData:
+              PULSAR_MEM: >
+                -Xms256m
+                -Xmx256m
+              PULSAR_GC: >
+                -Dcom.sun.management.jmxremote
+                -Djute.maxbuffer=10485760
+                -XX:+ParallelRefProcEnabled
+                -XX:+UnlockExperimentalVMOptions
+                -XX:+DoEscapeAnalysis -XX:+DisableExplicitGC
+                -XX:+PerfDisableSharedMem
+                -Dzookeeper.forceSync=no
           broker:
             component: broker
             podMonitor:
