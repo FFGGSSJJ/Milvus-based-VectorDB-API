@@ -89,6 +89,10 @@ spec:
         values:
           proxy:
             replicaCount: 2
+            resources:
+              requests:
+                cpu: 0.01
+                memory: 256Mi
             configData:
               PULSAR_MEM: >
                 -Xms2048M
@@ -104,12 +108,12 @@ spec:
                 storageClassName:
             resources:
               requests:
-                memory: 0
-                cpu: 0
+                cpu: 0.01
+                memory: 256Mi
             configData:
               PULSAR_MEM: >
-                -Xms1024M
-                -Xmx1024M
+                -Xms256m
+                -Xmx256m
           bookkeeper:
             volumes:
               journal:
@@ -122,28 +126,26 @@ spec:
                 storageClassName:
             resources:
               requests:
-                memory: 0
-                cpu: 0
+                cpu: 0.01
+                memory: 256Mi
             configData:
               PULSAR_MEM: >
-                -Xms4096M
-                -Xmx4096M
-                -XX:MaxDirectMemorySize=8192M
+                -Xms256m
+                -Xmx256m
+                -XX:MaxDirectMemorySize=256m
           broker:
             component: broker
             podMonitor:
               enabled: false
-            replicaCount: 2
+            replicaCount: 1
             resources:
               requests:
-                memory: 0
-                cpu: 0
+                cpu: 0.01
+                memory: 256Mi
             configData:
               PULSAR_MEM: >
-                -Xms4096M
-                -Xmx4096M
-                -XX:MaxDirectMemorySize=8192M
-
+                -Xms256m
+                -Xmx256m
     storage:
       inCluster:
         values:
