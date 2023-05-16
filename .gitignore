@@ -1,6 +1,7 @@
 # IDE
 ## Pycharm IDE
 /.idea
+.DS_Store
 
 # Python files
 *.pyc
